@@ -22,6 +22,11 @@ unstow() {
 	then
 	  secrets
 	fi
+	if [ -d "$HOME/.ssh" ]
+	then
+		echo "Backing up existing .ssh folder to prevent clash with stow"
+		mv $HOME/.ssh $HOME/.ssh-backup
+	fi
 	(cd $HOME/secrets && stow *)
 }
 
