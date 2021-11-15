@@ -7,6 +7,7 @@ then
   SUDO=sudo
 fi
 source make_gpg.sh
+source secrets.sh
 
 echo "Updating software packages"
 $SUDO ./pacapt -Sy
@@ -14,17 +15,25 @@ echo "Installing zsh cURL and git dependencies"
 $SUDO ./pacapt --noconfirm -S zsh git curl stow rclone 
 
 unstow() {
-	mv ~/.zshrc ~/.zshrc-backup
-	(cd ~/dotfiles && stow *)
+	mv $HOME/.zshrc $HOME/.zshrc-backup
+	(cd $HOME/dotfiles && stow *)
+	
+	if [ ! -d "$HOME/secrets" ]
+	then
+	  secrets
+	fi
+	(cd $HOME/secrets && stow *)
 }
 
 install_plugins() {
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-  #echo "source ~/dotfiles/Spaceship10kTheme" >~/.zshrc
 }
 
+dotfiles() {
+  git clone https://github.com/konradish/dotfiles $HOME/dotfiles
+}
 
 if [ ! -f "$HOME/.zshrc" ]
 then
@@ -32,6 +41,7 @@ then
 fi
 #$SUDO rclone configure
 #restore_secrets
+dotfiles
 unstow
 install_plugins
 exec zsh
