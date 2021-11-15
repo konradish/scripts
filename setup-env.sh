@@ -11,7 +11,7 @@ source make_gpg.sh
 echo "Updating software packages"
 $SUDO ./pacapt -Sy
 echo "Installing zsh cURL and git dependencies"
-$SUDO ./pacapt install --noconfirm -S zsh git curl stow rclone gpg
+$SUDO ./pacapt --noconfirm -S zsh git curl stow rclone 
 
 unstow() {
 	mv ~/.zshrc ~/.zshrc-backup
