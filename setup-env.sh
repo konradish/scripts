@@ -14,15 +14,15 @@ echo "Installing zsh cURL and git dependencies"
 $SUDO ./pacapt install --noconfirm -S zsh git curl stow rclone gpg
 
 unstow() {
-	stow -d dotfiles
-	stow -d secrets
+	mv ~/.zshrc ~/.zshrc-backup
+	(cd ~/dotfiles && stow *)
 }
 
 install_plugins() {
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-  echo "source ~/dotfiles/Spaceship10kTheme" >~/.zshrc
+  #echo "source ~/dotfiles/Spaceship10kTheme" >~/.zshrc
 }
 
 
@@ -32,6 +32,6 @@ then
 fi
 #$SUDO rclone configure
 #restore_secrets
+unstow
 install_plugins
-#unstow
 exec zsh
