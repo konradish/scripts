@@ -7,3 +7,4 @@ echo \
 
 apt update
 apt install -y docker-ce-cli
+#apt install docker-ce docker-ce-cli containerd.io
