@@ -11,8 +11,20 @@ source secrets.sh
 
 echo "Updating software packages"
 $SUDO ./pacapt -Sy
+
 echo "Installing zsh cURL and git dependencies"
 $SUDO ./pacapt --noconfirm -S zsh git curl stow rclone 
+
+echo "Installing utilities I like to have"
+$SUDO ./pacapt --noconfirm -S neovim
+
+install_gh() {
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+$SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | $SUDO tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+$SUDO apt update
+$SUDO apt install gh
+}
 
 unstow() {
 	mv $HOME/.zshrc $HOME/.zshrc-backup
