@@ -68,7 +68,7 @@ dotfiles() {
   git clone https://github.com/konradish/dotfiles $HOME/dotfiles
 }
 
-install_zsh() {
+install_omz() {
 	if [ ! -f "$HOME/.zshrc" ]
 	then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --skip-chsh
@@ -79,7 +79,7 @@ install_zsh() {
 if [ $# -eq 0 ]
 then
 	install_software
-	install_zsh
+	install_omz
 	install_plugins
 	dotfiles
 	unstow
