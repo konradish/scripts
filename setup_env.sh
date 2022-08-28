@@ -81,10 +81,10 @@ then
 	install_software
 	install_gh
 	install_zsh
-	install_plugins
+	#install_plugins # This should be checked in as part of dotfiles
 	dotfiles
 	unstow
 	exec zsh
 else
-	$1
+	$@
 fi
