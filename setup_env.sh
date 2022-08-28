@@ -78,12 +78,12 @@ install_zsh() {
 # If no parameter, run everything, else run the parameter
 if [ $# -eq 0 ]
 then
+	dotfiles
+	unstow
 	install_software
 	install_gh
 	install_zsh
-	#install_plugins # This should be checked in as part of dotfiles
-	dotfiles
-	unstow
+	install_plugins
 	exec zsh
 else
 	$@
