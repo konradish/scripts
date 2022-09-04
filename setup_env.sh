@@ -17,7 +17,7 @@ install_software() {
 	$SUDO ./pacapt --noconfirm -S zsh git curl stow rclone 
 
 	echo "Installing utilities I like to have"
-	$SUDO ./pacapt --noconfirm -S neovim tmux
+	$SUDO ./pacapt --noconfirm -S neovim tmux fzf
 }
 
 
