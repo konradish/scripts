@@ -29,6 +29,11 @@ install_gh() {
 	$SUDO apt install gh
 }
 
+install_fzf() {
+	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+	$HOME/.fzf/install --key-bindings --completion --update-rc
+}
+
 unstow() {
 	# Backup the existing .zshrc file because we are probably going to obliterate it when we unstow
 	mv $HOME/.zshrc $HOME/.zshrc-backup
